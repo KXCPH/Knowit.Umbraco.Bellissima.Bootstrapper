@@ -1,0 +1,12 @@
+
+Package.Reference.Project/Package.Reference.Project.Frontend/node_modules/
+
+Package.Reference.Project/Package.Reference.Project.Backend/bin/
+
+Package.Reference.Project/Package.Reference.Project.Frontend/obj/
+
+Package.Reference.Project/Package.Reference.Project.Backend/obj/
+
+Package.Reference.Project/.vs/
+
+Package.Reference.Project/Package.Reference.Project.Frontend/.vscode/

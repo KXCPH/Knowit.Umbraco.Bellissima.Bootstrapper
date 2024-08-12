@@ -1,0 +1,27 @@
+{
+  "name": "package.reference.project.frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc && vite build",
+    "watch": "node ./build/watch.js ./../../umbraco wwwroot/app_plugins/Package.Reference.Project.Frontend",
+    "init-umbraco": "powershell -File ./../umbraco/CreateUmbracoProj.ps1 --",
+    "remove-umbraco": "powershell -File ./../umbraco/RemoveUmbracoProj.ps1 --"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lit": "^3.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "@umbraco-cms/backoffice": "^14.0.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.9.0",
+    "inquirer": "^10.1.8",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1"
+  }
+}
