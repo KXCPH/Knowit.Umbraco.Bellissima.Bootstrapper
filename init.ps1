@@ -1,11 +1,12 @@
 # Define the parameters
 param (
-    [string]$newProjectName
+    [string]$newProjectName,
+    [string]$destinationPath
 )
 
 # Define paths
 $referenceFolder = "Package.Reference.Project"
-$newProjectFolder = $newProjectName
+$newProjectFolder = Join-Path -Path $destinationPath -ChildPath $newProjectName
 
 # Check if the reference folder exists
 if (-Not (Test-Path $referenceFolder)) {
@@ -13,28 +14,63 @@ if (-Not (Test-Path $referenceFolder)) {
     exit 1
 }
 
-# Copy the reference folder to the new project folder, excluding bin and node_modules
+# Check if the destination path exists
+if (-Not (Test-Path $destinationPath)) {
+    Write-Error "The destination path '$destinationPath' does not exist."
+    exit 1
+}
+
+# Create the new project folder if it doesn't exist
+if (-Not (Test-Path $newProjectFolder)) {
+    try {
+        New-Item -Path $newProjectFolder -ItemType Directory -Force | Out-Null
+    } catch {
+        Write-Error "Failed to create the new project folder at '$newProjectFolder'."
+        exit 1
+    }
+}
+
+# Copy the reference folder contents to the new project folder, excluding bin and node_modules
 function Copy-Filtered {
     param (
         [string]$sourcePath,
         [string]$destinationPath
     )
+    # Remove the root from the source path to start copying from the folder contents
     Get-ChildItem -Path $sourcePath -Recurse -Force | Where-Object {
         $_.FullName -notmatch '\\bin($|\\)' -and
         $_.FullName -notmatch '\\node_modules($|\\)'
     } | ForEach-Object {
-        $dest = $_.FullName -replace [Regex]::Escape($sourcePath), $destinationPath
+        # Calculate the relative path from the reference folder to ensure correct path construction
+        $relativePath = $_.FullName.Substring($sourcePath.Length).TrimStart('\')
+        $dest = Join-Path -Path $destinationPath -ChildPath $relativePath
+
+        # Check for path length and format issues
+        if ($dest.Length -ge 260) {
+            Write-Warning "Path length exceeds limit: $dest"
+            return
+        }
+
         if ($_.PSIsContainer) {
             if (-Not (Test-Path $dest)) {
-                New-Item -Path $dest -ItemType Directory | Out-Null
+                try {
+                    New-Item -Path $dest -ItemType Directory -Force | Out-Null
+                } catch {
+                    Write-Warning "Failed to create directory: $dest"
+                }
             }
         } else {
-            Copy-Item -Path $_.FullName -Destination $dest -Force
+            try {
+                Copy-Item -Path $_.FullName -Destination $dest -Force
+            } catch {
+                Write-Warning "Failed to copy file: $_.FullName to $dest"
+            }
         }
     }
 }
 
-Copy-Filtered -sourcePath $referenceFolder -destinationPath $newProjectFolder
+# Start copying from within the reference folder to avoid nesting the entire structure
+Copy-Filtered -sourcePath (Join-Path -Path $PWD -ChildPath $referenceFolder) -destinationPath $newProjectFolder
 
 # Function to rename files and directories, excluding bin and node_modules
 function Rename-ItemsRecursively($path, $oldName, $newName) {
@@ -44,7 +80,11 @@ function Rename-ItemsRecursively($path, $oldName, $newName) {
     } | ForEach-Object {
         $newNamePath = $_.FullName -replace [Regex]::Escape($oldName), $newName
         if ($_.FullName -ne $newNamePath) {
-            Rename-Item -Path $_.FullName -NewName $newNamePath
+            try {
+                Rename-Item -Path $_.FullName -NewName $newNamePath
+            } catch {
+                Write-Warning "Failed to rename: $_.FullName to $newNamePath"
+            }
         }
     }
 }
@@ -55,7 +95,11 @@ function Replace-ContentInFiles($path, $oldName, $newName) {
         $_.FullName -notmatch '\\bin($|\\)' -and
         $_.FullName -notmatch '\\node_modules($|\\)'
     } | ForEach-Object {
-        (Get-Content -Path $_.FullName) -replace [Regex]::Escape($oldName), $newName | Set-Content -Path $_.FullName
+        try {
+            (Get-Content -Path $_.FullName) -replace [Regex]::Escape($oldName), $newName | Set-Content -Path $_.FullName
+        } catch {
+            Write-Warning "Failed to replace content in: $_.FullName"
+        }
     }
 }
 
