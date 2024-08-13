@@ -68,6 +68,8 @@ if ($latestNupkg) {
     Set-Location -Path $scriptDir
 
     # Construct the dotnet add package command without version
+    
+    dotnet add "$projectPath/$projectName.csproj" package uSync
     $dotnetCommand = "dotnet add `"$projectPath/$projectName.csproj`" package `"$packageId`" --source `"$localSourcePath`""
 
     # Output the command for troubleshooting

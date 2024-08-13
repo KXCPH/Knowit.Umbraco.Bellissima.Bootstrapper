@@ -28,4 +28,5 @@ dotnet sln $solutionFilePath add "$projectName/$projectName.csproj" --solution-f
 
 Write-Host "Umbraco project $projectName created and added to the solution in the 'Umbraco' folder."
 
+dotnet add .\"Umbraco-$UmbracoVersion"\"Umbraco-$UmbracoVersion".csproj package uSync
 dotnet add .\"Umbraco-$UmbracoVersion"\"Umbraco-$UmbracoVersion".csproj reference ..\Package.Reference.Project.Backend\Package.Reference.Project.Backend.csproj
