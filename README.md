@@ -53,3 +53,7 @@ npm run publish
 This will increment the z in the x.y.z version number of your package with 1 as well as put the packed nuget in /nuget
 
 You are responsible for incrementing y and x depending on your preferences.
+
+### Is it working?
+
+If everything has worked as it should, your Umbraco-14.1.1 (or whatever version) should have a custom section called "Knowit" installed. It won't be visible though, until you go into the User section and edit the user group "Administrators" and add the section
