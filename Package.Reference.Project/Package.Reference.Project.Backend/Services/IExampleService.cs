@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Package.Reference.Project.Backend
+namespace Package.Reference.Project.Backend.Services
 {
-    internal class Class1
+    public interface IExampleService
     {
+        Task<string> GetExampleData();
     }
 }

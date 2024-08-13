@@ -11,10 +11,8 @@ $scriptDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 # Define the path to the solution file
 $solutionFilePath = Join-Path -Path $scriptDir -ChildPath './../Package.Reference.Project.sln'
 
-# Define the project directory and name
-$projectName = "Umbraco-$UmbracoVersion"
-$projectDir = Join-Path -Path $scriptDir -ChildPath $projectName
-$projectFilePath = Join-Path -Path $projectDir -ChildPath "$projectName.csproj"
+# Define the project names
+$projectNames = @("Umbraco-$UmbracoVersion", "Umbraco-$UmbracoVersion-nuget")
 
 # Function to remove project from the solution
 function Remove-ProjectFromSolution {
@@ -55,10 +53,16 @@ function Delete-ProjectDirectory {
     }
 }
 
-# Remove the project from the solution
-Remove-ProjectFromSolution -solutionFile $solutionFilePath -projectFile $projectFilePath
+# Iterate over both project types and remove them
+foreach ($projectName in $projectNames) {
+    $projectDir = Join-Path -Path $scriptDir -ChildPath $projectName
+    $projectFilePath = Join-Path -Path $projectDir -ChildPath "$projectName.csproj"
 
-# Delete the project directory
-Delete-ProjectDirectory -projectDirectory $projectDir
+    # Remove the project from the solution
+    Remove-ProjectFromSolution -solutionFile $solutionFilePath -projectFile $projectFilePath
 
-Write-Host "Umbraco project $projectName removed and directory deleted."
+    # Delete the project directory
+    Delete-ProjectDirectory -projectDirectory $projectDir
+
+    Write-Host "Umbraco project $projectName removed and directory deleted."
+}

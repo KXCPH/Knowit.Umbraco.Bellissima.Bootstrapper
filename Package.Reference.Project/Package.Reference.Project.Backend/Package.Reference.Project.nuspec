@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<package>
+	<metadata>
+		<id>Package.Reference.Project</id>
+		<version>0.0.10</version>
+		<authors>Knowit</authors>
+		<owners>Knowit</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>This is a sample package for Umbraco</description>
+		<readme>README.md</readme>
+		<title>Package.Reference.Project</title>
+		<targetFramework>net8.0</targetFramework>
+		<dependencies>
+			<dependency id="Umbraco.Cms" version="[14.1.0,)" />
+		</dependencies>
+	</metadata>
+	<files>
+		<!-- Include compiled DLLs -->
+		<file src="bin\Release\net8.0\*.dll" target="lib/net8.0" />
+
+		<!-- Include frontend files -->
+		<file src="ui\**\*.*" target="contentFiles/any/any/ui/" />
+
+		<!-- Include the targets file -->
+		<file src="build\nuget.targets" target="build\nuget.targets" />
+	</files>
+</package>

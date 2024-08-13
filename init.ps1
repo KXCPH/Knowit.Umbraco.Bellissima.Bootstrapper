@@ -8,6 +8,9 @@ param (
 $referenceFolder = "Package.Reference.Project"
 $newProjectFolder = Join-Path -Path $destinationPath -ChildPath $newProjectName
 
+# Store the original location
+$originalLocation = Get-Location
+
 # Check if the reference folder exists
 if (-Not (Test-Path $referenceFolder)) {
     Write-Error "The reference folder '$referenceFolder' does not exist."
@@ -110,3 +113,26 @@ Rename-ItemsRecursively -path $newProjectFolder -oldName $referenceFolder -newNa
 Replace-ContentInFiles -path $newProjectFolder -oldName $referenceFolder -newName $newProjectName
 
 Write-Host "Project '$referenceFolder' has been copied and renamed to '$newProjectFolder'."
+
+# Navigate to the frontend folder and run npm install
+$frontendFolderPath = Join-Path -Path $newProjectFolder -ChildPath "$newProjectName.Frontend"
+
+if (Test-Path $frontendFolderPath) {
+    try {
+        Write-Host "Running npm install in '$frontendFolderPath'."
+        Set-Location -Path $frontendFolderPath
+        npm install
+        Write-Host "npm install completed successfully in '$frontendFolderPath'."
+    } catch {
+        Write-Error "Failed to run npm install in '$frontendFolderPath'."
+    } finally {
+        # Return to the original location
+        Set-Location -Path $originalLocation
+        Write-Host "Returned to the original location: $originalLocation"
+    }
+} else {
+    Write-Warning "Frontend folder '$frontendFolderPath' does not exist."
+    # Return to the original location if the frontend folder doesn't exist
+    Set-Location -Path $originalLocation
+    Write-Host "Returned to the original location: $originalLocation"
+}

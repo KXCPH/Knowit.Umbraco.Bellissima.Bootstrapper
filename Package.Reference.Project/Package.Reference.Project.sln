@@ -9,8 +9,6 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Package.Reference.Project.F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Umbraco", "Umbraco", "{16F889CD-6E9C-4938-AC89-7CBE14DEFC07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco-14.1.1", "umbraco\Umbraco-14.1.1\Umbraco-14.1.1.csproj", "{5D5C564D-AEA0-4735-AF51-4D810E83AFFD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,18 +25,11 @@ Global
 		{D4EF68A4-E7FF-4B78-8340-D8B2CE97DD02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4EF68A4-E7FF-4B78-8340-D8B2CE97DD02}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D4EF68A4-E7FF-4B78-8340-D8B2CE97DD02}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{5D5C564D-AEA0-4735-AF51-4D810E83AFFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D5C564D-AEA0-4735-AF51-4D810E83AFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D5C564D-AEA0-4735-AF51-4D810E83AFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5D5C564D-AEA0-4735-AF51-4D810E83AFFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7EF47476-2DE6-4B08-B6B2-EE0B869985AB}
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{5D5C564D-AEA0-4735-AF51-4D810E83AFFD} = {16F889CD-6E9C-4938-AC89-7CBE14DEFC07}
 	EndGlobalSection
 EndGlobal

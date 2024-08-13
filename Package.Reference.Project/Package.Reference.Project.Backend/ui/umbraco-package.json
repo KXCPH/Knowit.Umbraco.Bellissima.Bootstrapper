@@ -1,5 +1,5 @@
 {
-    "$schema": "./umbraco-package-schema.json",
+    "$schema": "./../umbraco-package-schema.json",
     "id": "Package.Reference.Project.Frontend",
     "name": "Package.Reference.Project.Frontend",
     "allowPackageTelemetry": true,
@@ -9,7 +9,7 @@
           "name": "knowit-Package.Reference.Project.Frontend EntryPoint",
           "alias": "knowit-Package.Reference.Project.Frontend.entrypoint",
           "type": "entryPoint",
-          "js": "app_plugins/package.reference.project.frontend/dist/index.js"
+          "js": "/app_plugins/package.reference.project.frontend/dist.js"
         }
       ]
 }

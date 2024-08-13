@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Define the output directory from environment variables or fallback to default
-const outDir = process.env.OUT_DIR || './dist';
+const outDir = process.env.OUT_DIR || './../Package.Reference.Project.Backend/ui';
 
 export default defineConfig({
     build: {
