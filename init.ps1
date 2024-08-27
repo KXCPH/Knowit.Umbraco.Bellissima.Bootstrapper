@@ -23,14 +23,19 @@ if (-Not (Test-Path $destinationPath)) {
     exit 1
 }
 
+# If the destination project folder already exists, run update.ps1
+if (Test-Path $newProjectFolder) {
+    Write-Host "Destination project folder '$newProjectFolder' already exists. Running update.ps1..."
+    & ".\update.ps1" -newProjectName $newProjectName -destinationPath $destinationPath
+    exit 0
+}
+
 # Create the new project folder if it doesn't exist
-if (-Not (Test-Path $newProjectFolder)) {
-    try {
-        New-Item -Path $newProjectFolder -ItemType Directory -Force | Out-Null
-    } catch {
-        Write-Error "Failed to create the new project folder at '$newProjectFolder'."
-        exit 1
-    }
+try {
+    New-Item -Path $newProjectFolder -ItemType Directory -Force | Out-Null
+} catch {
+    Write-Error "Failed to create the new project folder at '$newProjectFolder'."
+    exit 1
 }
 
 # Copy the reference folder contents to the new project folder, excluding bin and node_modules
