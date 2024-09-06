@@ -7,6 +7,8 @@ This project help you bootstrap package development for Umbracos Bellissima Back
 
 It's opinionated, but gets you up an running fast.
 
+Currently heavy use of Powershell and written for a windows stack, so contributions to the effect of making it cross platform are very welcome.
+
 ## How to use
 The project contains a reference project - you should not touch it.
 
