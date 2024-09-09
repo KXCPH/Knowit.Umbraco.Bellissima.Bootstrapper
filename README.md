@@ -28,13 +28,14 @@ You should have the Backend and Frontend projects open simultaneously. This read
 
 The Frontend project:
 ```json
-"build": "tsc && vite build",
-"watch": "node ./build/watch.js ./../../umbraco wwwroot/app_plugins/Package.Reference.Project.Frontend",
-"init-umbraco": "powershell -File ./../umbraco/CreateUmbracoProj.ps1 --",
-"test-umbraco": "powershell -File ./../umbraco/TestUmbracoProj.ps1 --",
-"remove-umbraco": "powershell -File ./../umbraco/RemoveUmbracoProj.ps1 --",
-"generate": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 openapi-ts --file openapi-ts.config.ts",
-"publish": "powershell -File ./../pack.ps1"
+    "build": "tsc && vite build",
+    "watch": "node ./build/watch.js ./../../Umbraco wwwroot/app_plugins/Package.Reference.Project.Frontend",
+    "init-umbraco": "node build/umbraco.js init-umbraco",
+    "test-umbraco": "node build/umbraco.js test-umbraco",
+    "remove-umbraco": "node build/umbraco.js remove-umbraco",
+    "usync": "node build/umbraco.js usync",
+    "generate": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 openapi-ts --file openapi-ts.config.ts",
+    "publish": "node build/umbraco.js publish"
 ```
 
 The frontend project contains script commands to help you for development. Use "init-umbraco" to attach a new umbraco project to your Solution.
@@ -71,6 +72,16 @@ npm run publish
 This will increment the z in the x.y.z version number of your package with 1 as well as put the packed nuget in /nuget
 
 You are responsible for incrementing y and x depending on your preferences.
+
+### The "Usync-Sync"
+
+To always make all your umbraco installations up to date you can run
+
+```powershell
+npm run usync
+```
+
+Which will take the "latest" usync folder (ie. the Umbraco version you worked on last) and distribute it out to all other Umbraco installations in the /Umbraco folder
 
 ### Is it working?
 
