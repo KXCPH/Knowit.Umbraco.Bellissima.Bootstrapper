@@ -75,3 +75,7 @@ You are responsible for incrementing y and x depending on your preferences.
 ### Is it working?
 
 If everything has worked as it should, your Umbraco-14.1.1 (or whatever version) should have a custom section called "Knowit" installed. It won't be visible though, until you go into the User section and edit the user group "Administrators" and add the section
+
+# Licence
+
+MIT

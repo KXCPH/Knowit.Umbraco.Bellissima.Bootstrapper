@@ -4,11 +4,11 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
-    "watch": "node ./build/watch.js ./../../umbraco wwwroot/app_plugins/Package.Reference.Project.Frontend",
-    "init-umbraco": "powershell -File ./../umbraco/CreateUmbracoProj.ps1 --",
-    "test-umbraco": "powershell -File ./../umbraco/TestUmbracoProj.ps1 --",
-    "remove-umbraco": "powershell -File ./../umbraco/RemoveUmbracoProj.ps1 --",
-    "usync": "powershell -File ./../umbraco/Usync.ps1",
+    "watch": "node ./build/watch.js ./../../Umbraco wwwroot/app_plugins/Package.Reference.Project.Frontend",
+    "init-umbraco": "node build/umbraco.js init-umbraco",
+    "test-umbraco": "node build/umbraco.js test-umbraco",
+    "remove-umbraco": "node build/umbraco.js remove-umbraco",
+    "usync": "node build/umbraco.js usync",
     "generate": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 openapi-ts --file openapi-ts.config.ts",
     "publish": "powershell -File ./../pack.ps1"
   },

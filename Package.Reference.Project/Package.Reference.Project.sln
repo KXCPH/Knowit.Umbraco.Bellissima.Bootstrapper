@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Package.Reference.Project.B
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Package.Reference.Project.Frontend", "Package.Reference.Project.Frontend\Package.Reference.Project.Frontend.esproj", "{D4EF68A4-E7FF-4B78-8340-D8B2CE97DD02}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Umbraco", "Umbraco", "{16F889CD-6E9C-4938-AC89-7CBE14DEFC07}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Umbraco", "Umbraco", "{5CFD1E54-92AE-4461-AB21-6045BB739A48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
