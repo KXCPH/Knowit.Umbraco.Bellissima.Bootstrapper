@@ -2,6 +2,7 @@ import init from "./umbraco/init.js";
 import test from "./umbraco/test.js";
 import remove from "./umbraco/remove.js";
 import syncUsync from "./umbraco/usync.js";
+import publish from "./umbraco/publish.js";
 // Define function for "init-umbraco
 function initUmbraco(args) {
   init(args);
@@ -21,6 +22,10 @@ function usync(args) {
   syncUsync(args)
 }
 
+function publishPackage(args) {
+  publish(args);
+}
+
 // Get the action and additional parameters from command-line arguments
 const [,, action, ...args] = process.argv; // Capture action and all additional arguments
 
@@ -37,6 +42,9 @@ switch (action) {
     break;
   case 'usync':
     usync(args);
+    break;
+  case 'publish':
+    publishPackage(args);
     break;
   default:
     console.log('Unknown action. Please specify one of the following: init-umbraco, test-umbraco, remove-umbraco');
