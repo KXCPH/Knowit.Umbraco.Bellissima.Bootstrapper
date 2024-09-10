@@ -15,9 +15,23 @@ The project contains a reference project - you should not touch it.
 Use the init.ps1 powershell to create your project.
 
 **Example:**
+Powershell
 ```powershell
 .\init.ps1 -newProjectName "my.test.project" -destinationPath "C:\code"
 ```
+
+Bash
+```bash
+./init.sh -newProjectName "my.test.project" -destinationPath "C:\code"
+```
+
+Or the easiest way if you are using docker
+```bash
+docker run -it --rm -e newProjectName="my.test.project" generate
+# look in the generated_projects folder in the current folder for the generated project
+```
+
+
 The script will copy the reference project, rename everything to your project name and place it at your destination destinationPath
 
 It will then initialize the frontend project.
