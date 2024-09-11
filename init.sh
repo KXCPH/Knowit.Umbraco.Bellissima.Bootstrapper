@@ -52,7 +52,7 @@ check_folder "$referenceFolder" "The reference folder $referenceFolder does not 
 check_folder "$destinationPath" "The destination path $destinationPath does not exist."
 
 # Copy the reference folder contents to the new project folder, excluding bin and node_modules
-if [ command -v rsync &> /dev/null ]; then
+if ! [ command -v rsync &> /dev/null ]; then
     rsync -av --exclude=node_modules --exclude=bin "$referenceFolder/" "$newProjectFolder"
 else
     scp -r "$referenceFolder/." "$newProjectFolder"
